@@ -6,7 +6,6 @@ import (
 	"net"
 	"os"
 	"os/exec"
-	"strconv"
 	"strings"
 	"time"
 )
@@ -116,27 +115,14 @@ func socketLoop(listener net.Listener, mode Mode) {
 			}
 			bytes = bytes[0:n]
 			strbytes := strings.TrimSpace(string(bytes))
-			entities := mode.getEntities()
+			// entities := mode.getEntities()
+			entities := []string{}
 			if strbytes == "list" {
 				for _, entity := range entities {
 					padding := strings.Repeat("\n", 255-len(entity))
 					_, err = conn.Write([]byte(entity + padding))
 					if err != nil {
 						log.Fatal("Could not write to socker file")
-					}
-				}
-				conn.Close()
-				stop = true
-			} else if strings.HasPrefix(strbytes, "kill ") {
-				parts := strings.Split(strbytes, " ")
-				killhash, err := strconv.ParseInt(parts[1], 10, 32)
-				if err != nil {
-					log.Fatal("Could not parse kill hash")
-				}
-				for _, entity := range entities {
-					if hash(entity) == int32(killhash) {
-						mode.deleteEntity(entity)
-						break
 					}
 				}
 				conn.Close()
