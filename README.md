@@ -1,8 +1,6 @@
-# Kube DOOM
-## Kill Kubernetes pods using Id's Doom!
+# zCX DOOM
 
-The next level of chaos engineering is here! Kill pods inside your Kubernetes
-cluster by shooting them in Doom!
+The next level of chaos engineering is here! 
 
 This is a fork of the excellent
 [gideonred/dockerdoomd](https://github.com/gideonred/dockerdoomd) using a
